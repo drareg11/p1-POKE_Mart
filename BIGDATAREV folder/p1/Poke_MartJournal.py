@@ -7,18 +7,23 @@ from pokepython_mysql import insert_records, admin_login, customer_login, view_c
 def main():
     try:
         cnx = mysql.connector.connect(user=p.user, password=p.password, host=p.host, database="Project_1")
-        my_cursor = cnx.cursor()
+        my_cursor = cnx.cursor
     except mysql.connector.Error as mce:
         print(mce.msg)
         return
     except Exception as e:
         print("ERROR:Exiting the program")
         return
-    logging.basicConfig(filename="citizencomputerstore.log", level=logging.DEBUG, format='%(asctime)s :: %(message)s')
+    logging.basicConfig(filename="POKEmart.log", level=logging.DEBUG, format='%(asctime)s :: %(message)s')
+    my_cursor.close() #CHECK IF THESE ARE NEEDED HERE
+    cnx.close()
 
 
 insert_records()
 
+
+
 if __name__ == "__main__":
     main()
+
 

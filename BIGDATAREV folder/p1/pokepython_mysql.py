@@ -5,7 +5,7 @@ import logging
 from Poke_Mart import admin, customer, orders
 
 try:
-    cnx = mysql.connect.connector(user=p.user, password=p.password, host=p.host, database="Project_1")
+    cnx = mysql.connector.connect(user=p.user, password=p.password, host=p.host, database="Project_1")
     my_cursor = cnx.cursor
 except mysql.connector.Error as mce:
     print(mce.msg)
@@ -25,7 +25,7 @@ def insert_records():
         print("\t3) New Customer Create Account\n")
         print("\t4) Quit\n")
 
-        valid = False
+        invalid = False
         while not valid:
             try:
                 input_type = int(input(" Enter Option >>>>"))
@@ -43,7 +43,7 @@ def insert_records():
             customer_login()
         elif input_type==3:
             print("***NEW CUSTOMER CREATE ACCOUNT***\n")
-            add_new_customer()
+            create_new_cust()
         elif input_type ==4:
             print("***Quiting the program ..........<><><>***\n")
             logging.info("User Quits the Program ")
@@ -51,7 +51,7 @@ def insert_records():
         else:
             print("Invalid Integer. Enter Input : [1 , 2 , 3 , 4]\nRestarting The Store>>>>>>>.........")
             logging.info("Invalid input was entered ")
-
+####LOGIN FUNCT.
 def admin_login():
     print("****WELCOME TO THE ADMIN PORTAL****\nLOGIN BELOW!!")
     restart = True
@@ -64,17 +64,17 @@ def admin_login():
                     break
                 else:
                     raise ValueError
-                    print("\nInvalid name format")
+                    # print("\nInvalid name format")
             except ValueError as ve :
                 print("Invalid NAME format.  NAME MUST BE A STRING FORMAT:")
             else:
                 break
 
-        valid = False
-        while not valid:
+        invalid = False
+        while not invalid:
             try:
                 passwrd =int(input("enter password"))
-                valid = True
+                invalid = True
             except:
                 print("Invalid Input. PASSWORD must be an Integer : ####")
 
@@ -91,17 +91,17 @@ def admin_login():
             restart = True
             while restart == True:
                 print(f"\nSELECT OPTION [1 , 2 , 3 , 4]")
-                print("\t1) Add Records ")
+                print("\t1) Add NEW acct. or inventory to Records ")
                 print("\t2) View  Records ")
                 print("\t3) Update Existing Records ")
                 print("\t4) Delete Existing Records ")
                 print("\t5) quit ")
 
-                valid = False
-                while not valid:
+                invalid = False
+                while not invalid:
                     try:
                         select = int(input(f"\nEnter Option: >>>>>>>>>>\n" ))
-                        valid = True
+                        invalid = True
                     except:
                         print("Invalid Input. Enter an Integer : [1 , 2 , 3 , 5]")
 
@@ -109,14 +109,14 @@ def admin_login():
                     print("Welcome to the Admin ADD RECORDS section\n Select Record To Add: ")
                     print("\t1) Add New ADMIN ")
                     print("\t2) Add New Customer ")
-                    print("\t3) Add Items to Inventory  ")
+                    print("\t3) Add NEW Items to Inventory  ")
                     print("\t4) quit ")
 
-                    valid = False
-                    while not valid:
+                    invalid = False
+                    while not invalid:
                         try:
-                            select = int(input(f"Select option from the ADD RECORDS section {add.name} \n>>>>>"))
-                            valid = True
+                            select = int(input(f"Select option from the ADD NEW RECORDS section {add.name} \n>>>>>"))
+                            invalid = True
                         except:
                             print("Invalid Input. Enter an Integer : [1 , 2 , 3 , 4]")
 
@@ -124,10 +124,10 @@ def admin_login():
                         add_new_admin()
                         restart=True
                     elif select ==2:
-                        add_new_customer()
+                        create_new_cust()
                         restart=True
                     elif select ==3:
-                        add_new_item()
+                        add_new_items()
                         restart = True
                     elif select ==4:
                         print("***Quiting the ADD RECORDS SECTION ..........<><><>***\n")
@@ -145,11 +145,11 @@ def admin_login():
                     print("\t5) View All Placed Orders")
                     print("\t6) quit ")
 
-                    valid = False
-                    while not valid:
+                    invalid = False
+                    while not invalid:
                         try:
                             select = int(input(f"Select option from the VIEW RECORDS section {add.name}"))
-                            valid = True
+                            invalid = True
                         except:
                             print("Invalid Input. Enter an Integer : [1 , 2 , 3 , 4]")
 
@@ -175,11 +175,11 @@ def admin_login():
                     print("\t3) Modify Inventory")
                     print("\t4) quit ")
 
-                    valid = False
-                    while not valid:
+                    invalid = False
+                    while not invalid:
                         try:
                             select = int(input(f"Select option from the MODIFY RECORDS section {add.name}"))
-                            valid = True
+                            invalid = True
                         except:
                             print("Invalid Input. Enter an Integer : [1 , 2 , 3 , 4]")
 
@@ -201,11 +201,11 @@ def admin_login():
                     print("\t3) Delete Item in Inventory")
                     print("\t4) quit ")
 
-                    valid = False
-                    while not valid:
+                    invalid = False
+                    while not invalid:
                         try:
                             select = int(input(f"Select option from the DELETE RECORDS section {add.name}"))
-                            valid = True
+                            invalid = True
                         except:
                             print("Invalid Input. Enter an Integer : [1 , 2 , 3 , 4]")
                     if select == 1:
@@ -240,17 +240,17 @@ def customer_login():
         print("\t2) New Customer, SIGN UP Today!")
         print("\t3) Quit")
 
-        valid = False
-        while not valid:
+        invalid = False
+        while not invalid:
             try:
                 input_type = int(input("Enter Option >>>>"))
-                valid = True
+                invalid = True
             except:
                 print("Invalid Input. Enter Input : [1 , 2 , 3 ]")
 
 
         if input_type ==1:
-            print(f"Welcome Back Customer . Enter Log In details below:  \n")
+            print(f"Welcome Back Customer . Enter Log-In details below:  \n")
             while True:
                 try:
                     name = str(input(f"Registered Customer NAME >>>>>>\n"))
@@ -264,13 +264,13 @@ def customer_login():
                     break
 
 
-            valid = False
-            while not valid:
+            invalid = False
+            while not invalid:
                 try:
                     custID = int(input("Registered Customer ID >>>>>>\n"))
-                    valid = True
+                    invalid = True
                 except:
-                    print("Invalid input Enter ")
+                    print("Invalid input Enter integers only")
 
             query_customer_login = f"SELECT  * FROM  customers WHERE name ='{name}' AND customerID = {custID};"
             
@@ -283,18 +283,18 @@ def customer_login():
                 logging.info("successful log into customer portal")
                 print("Customer Log in successful....\n")
                 print("\t1) Place an Order")
-                print("\t2) View all orders")
+                print("\t2) View order History")
                 print("\t3) Quit")
 
-                valid = False
-                while not valid:
+                invalid = False
+                while not invalid:
                     try:
                         input_type = int(input("Make Selection >>>>"))
-                        valid = True
+                        invalid = True
                     except:
-                        print("Invalid input Enter ")
+                        print("Invalid input Entered ")
                 if input_type == 1:
-                    add_new_order()
+                    purchase()
                 elif input_type == 2:
                     view_customer_history()
                 elif input_type == 3:
@@ -306,7 +306,7 @@ def customer_login():
 
         elif input_type == 2:
             print("New Customer Account Creation Page ")
-            add_new_customer()
+            create_new_cust()
 
         elif input_type == 3:
             print("Quiting The Program")
@@ -315,21 +315,174 @@ def customer_login():
             print("Invalid Integer. Enter Input : [1 , 2 , 3 , 4]\n")
             logging.info("Invalid input was entered ")
 
-# #########  MORE FUNCTIONS########
+
+# ######### NEW ACCT FUNCT. ########
+
+def create_new_cust(): 
+    print(f"*****WELCOME NEW CUSTOMER!.... Enter: \tName \t# of Bages ")
+    while True:
+        try:
+            name = str(input(f"Please Enter your name"))
+            if re.search("[a-zA-Z]", name):
+                break
+            else:
+                raise ValueError
+                
+        except ValueError as ve:
+            print(f"Invalid name Formaat, NAME HAS TO BE A STRING ")
+        else:
+            break
+    
+    invalid = False
+    while not invalid:
+        try:
+            badges = int(input(f"Enter number of Trainer Badges Obtained"))
+            invalid = True
+        except: 
+            print("Invalid input ENTERED ")
+
+        
+        
+    new_customer=customer(name, badges) 
+    query_add_new_customer =f"INSERT INTO customers ( customerID, name, badges)VALUES('{new_customer.customerID}''{new_customer.name}','{new_customer.badges}')"
+    my_cursor.execute(query_add_new_customer)
+    cnx.commit()
+    print(f"New Customer Details :\n{new_customer}\n")
+    logging.info("new customer  account was created ")
+
 def add_new_admin():
-    pass
+   print("****Welcome NEW Admin! Please provide master-admin-code: >>>>>>")
+invalid = False
+while not invalid:
+    try:
+        mstr_psswrd = int(input("Enter master Admin password >>>>:\n"))
+        invalid = True
+    except:
+        print("Invalid Input. Enter an Integer ")
 
-def add_new_item():
-    pass
+        my_cursor.excute(f"SELECT * FROM masteradmin")       
+        for  value in my_cursor:
+            confirmPassword = value[2]
 
-def add_new_customer():
-    pass
+while mstr_psswrd == confirmPassword:
+    print("Successful log in ")
+    logging.info("Master Admin acct. logged in ")
+
+    print(f"\nWelcome NEW Admin......... PLEASE Enter YOUR NAME: \n")
+    while True:
+        try:
+            name = str(input(f">>>>>>>"))
+            if re.search("[a-zA-Z]", name):
+                    break
+            else:
+                raise ValueError
+                
+        except ValueError as ve:
+            print("Invalid Name Format........NAME MUST BE A STRING :")
+
+        invalid = False
+        while not invalid:
+            try:
+                admin_passcode = int(input("Enter New Admin Passcode: >>>\n"))
+                invalid = True
+            except:
+                print("Invalid Input. PASSCODE must be an Integer \n")
+
+        new_admin = admin(name, admin_passcode)
+        query_add_new_admin = f"INSERT INTO admin (name,passcode)VALUES ('{new_admin.name}','{new_admin.admin_passcode}')"
+
+        my_cursor.execute(query_add_new_admin)
+        cnx.commit()
+        logging.info("a new admin account was created")
+        print(f"A new Admin was added \nName: {name} \nPasscode: {admin_passcode}")
+        break
+
+else:
+    print("Incorrect login ")
+
+def purchase():
+    A = "SELECT * FROM inventory"
+    my_cursor.execute(A)
+    print("***POKEmart Inventory***")
+
+    for record in my_cursor:
+        print(record)
+        new_items=item(record[0], record[1], record[2], record[3])
+    
+    invalid = False
+    while not invalid:
+        try:
+            selected_item = str(input("Enter name of Item to Purchase: >>>\n"))
+            invalid = True
+        except: 
+            print("Invalid input Item needs to be a STRING")
+    invalid = False
+    while not invalid:
+        try:
+           customerID=int(input("PLease confirm Customer ID"))
+           invalid= True
+        except: 
+            print("INvalid input Customer ID must be an integer")
+    B = f"SELECT * FROM inventory WHERE name = {selected_item}"
+    my_cursor.execute(B)
+    for value in my_cursor:
+        name = value [1]
+        price = value[2]
+    
+    query_purchase_byname = f"INSERT INTO orders(customerID, customer, item-name,  price) VALUES('{customerID}','{name}','{selected_item}','{price}')"
+    cnx.commit()
+    logging.info("A new purchase was made")
+
+
+def add_new_items(): 
+    print("UPDATING INVENTORY PORTAL!!")
+    while True:
+        try:
+            new_item = str(input(f">>>>>>>"))
+            if re.search("[a-zA-Z]", name):
+                    break
+            else:
+                raise ValueError
+                
+        except ValueError as ve:
+            print("Invalid Name Format........NAME MUST BE A STRING :")
+        else:
+            break
+    invalid = False
+    while invalid != True:
+        try:
+            price=int(input("Enter Price of New Item to be entered "))
+            invalid = True
+        
+        except ValueError:
+            print("Price must be an Integer value: \n")
+            invalid = False
+        else:
+            pass
+    print(f"new Item added to INVENTORY")
+    query_add_item = f"INSERT INTO inventory (item, price)VALUES ('{new_item}','{price}') "
+    my_cursor.execute(query_add_item)
+    cnx.commit()
+    logging.info("new computer was added to the inventory")
 
 def view_Admin():
     pass
 
 def view_exist_customers():
-    pass
+    invalid = False
+    while not invalid:
+        try:
+            customerID = int(input("Enter Customer ID to view Their Orders: >>>\n"))
+            invalid = True
+        except:
+            print("Invalid Input . Customer ID must be an Integer ")
+    query_show_customers_order = f"SELECT * FROM orders WHERE customerID ={customerID}"
+    my_cursor.execute(query_show_customers_order)
+    for record in my_cursor:
+        print(record)
+        if record == None:
+            print("No Previous History")
+        logging.info("all placed orders were viewed")
 
 def view_Inventory():
     pass
@@ -367,9 +520,8 @@ def add_new_order():
 my_cursor = cnx.cursor()
 
 
-query = "SELECT * FROM employees_3nf"
 
-my_cursor.execute(query)
+
 
 for record in my_cursor:
         print(record)
